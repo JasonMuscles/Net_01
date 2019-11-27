@@ -25,14 +25,23 @@ def main():
             """为同一个客户端进行多次服务"""
             # 接收客户端发送过来的请求
             recv_data = new_client_socket.recv(1024)
-            print("客户端过来的请求是：%s" % recv_data.decode("gbk"))
 
-            # 回复一部分信息给客户端
-            new_client_socket.send("哈哈哈".encode("gbk"))
+            # 如果recv解堵塞，那么有两种方式
+            # 1.客户端发送过来数据
+            # 2.客户端调用close导致了，这里的recv解堵塞
+
+            if recv_data:
+
+                # 显示客户端发送的信息
+                print("客户端过来的请求是：%s" % recv_data.decode("gbk"))
+                # 回复一部分信息给客户端
+                new_client_socket.send("哈哈哈婆婆".encode("gbk"))
+            else:
+                break
 
         # 关闭套接字
         new_client_socket.close()
-        print("已关闭服务端口")
+        print("已完成这个客户端的服务")
 
     # 持续监听套接字，不能关闭，如果关闭XXX.accept不能再次接受新新客户端
     tcp_server_socket.close()
