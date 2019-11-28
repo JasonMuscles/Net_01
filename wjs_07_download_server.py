@@ -31,7 +31,8 @@ def main():
 
     tcp_server_socket.bind(("", 7788))
 
-    # 3.手机设置为正常接听状态 （让默认的套接字由主动变为被动 listen）
+    # 3.手机设置为正常接听状态， （让默认的套接字由主动变为被动 listen）
+    # 统一时间并发可接受的客服端数量（但是跟客户端的操作系统不同有一定影响，通常默认：128）
     tcp_server_socket.listen(128)
     while True:
         # 4.等待别人的电话到来（等待客户端的链接 accept）
